@@ -1,10 +1,7 @@
 import os
-import re
+import random
 import traceback
 import unicodedata
-import requests
-import wikipedia
-from urllib.parse import quote
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -26,185 +23,169 @@ def configurar_driver():
     service = Service(ChromeDriverManager().install())
     return webdriver.Chrome(service=service, options=options)
 
-def obetener_datos(driver, url):
-    driver.get(url)
-    time.sleep(2)
-    soup = BeautifulSoup(driver.page_source, "html.parser")
-
-    header = soup.find("header", class_="data-header")
-    if not header:
-        return None
-    
-    # Filtro de Retirados
-    club_info = header.find("div", class_="data-header__club-info")
-    if club_info:
-        estado = club_info.find("span", itemprop="affiliation")
-        if estado and "Retirado" in estado.text:
-            return None
-
-    #Nombre
-    def es_alfabeto_latino(texto):
-        return all('LATIN' in unicodedata.name(c) for c in texto if c.isalpha())
-
-    # Nombre Completo
-    nombre = "Desconocido"
-    try:
-        contenedores_info = soup.find_all("div", class_="info-table info-table--right-space")
-        for contenedor in contenedores_info:
-            spans = contenedor.find_all("span", class_="info-table__content")
-            for i in range(len(spans)):
-                if spans[i].text.strip() == "Nombre completo:" and i + 1 < len(spans):
-                    candidato = spans[i + 1].text.strip()
-                    if es_alfabeto_latino(candidato):
-                        nombre = candidato
-                    break
-    except Exception as e:
-        print(f"Error obteniendo nombre completo con caracteres válidos: {e}")
-
-    # Si no se pudo obtener un nombre completo válido (Caracteres no latinos), obtener nombre desde el header
-    if nombre == "Desconocido":
-        nombre_elem = header.find("h1")
-        if nombre_elem:
-            dorsal = nombre_elem.find("span", class_="data-header__shirt-number")
-            if dorsal:
-                dorsal.extract()
-            nombre = nombre_elem.get_text(" ", strip=True)
-
-    nombre_archivo = nombre.replace(" ", "_").replace("/", "-").replace("\\", "-")
-
-    def obtener_wikipedia(nombre_jugador):
+def obetener_datos(driver, url, max_intentos=10):
+    for intento in range(max_intentos):
         try:
-            wikipedia.set_lang("es")
+            driver.get(url)
+            time.sleep(2)
+            if "503" in driver.title or "Service Unavailable" in driver.page_source:
+                raise Exception("503 Service Unavailable")
+            soup = BeautifulSoup(driver.page_source, "html.parser")
 
-            resultados = wikipedia.search(nombre_jugador)
-            if not resultados:
-                print("No se encontró ninguna página.")
+            header = soup.find("header", class_="data-header")
+            if not header:
                 return None
+            
+            # Filtro de Retirados
+            club_info = header.find("div", class_="data-header__club-info")
+            if club_info:
+                estado = club_info.find("span", itemprop="affiliation")
+                if estado and "Retirado" in estado.text:
+                    return None
 
-            pagina = wikipedia.page(resultados[0])
-            html = requests.get(pagina.url).text
-            return BeautifulSoup(html, "html.parser")
+            #Nombre
+            def es_alfabeto_latino(texto):
+                return all('LATIN' in unicodedata.name(c) for c in texto if c.isalpha())
+
+            # Nombre Completo
+            nombre = "Desconocido"
+            try:
+                contenedores_info = soup.find_all("div", class_="info-table info-table--right-space")
+                for contenedor in contenedores_info:
+                    spans = contenedor.find_all("span", class_="info-table__content")
+                    for i in range(len(spans)):
+                        if (spans[i].text.strip() == "Nombre completo:" or spans[i].text.strip() == "Nombre en país de origen:") and i + 1 < len(spans):
+                            candidato = spans[i + 1].text.strip()
+                            if es_alfabeto_latino(candidato):
+                                nombre = candidato
+                            break
+            except Exception as e:
+                print(f"Error obteniendo nombre completo con caracteres válidos: {e}")
+
+            # Si no se pudo obtener un nombre completo válido (Caracteres no latinos), obtener nombre desde el header
+            if nombre == "Desconocido":
+                nombre_elem = header.find("h1")
+                if nombre_elem:
+                    dorsal = nombre_elem.find("span", class_="data-header__shirt-number")
+                    if dorsal:
+                        dorsal.extract()
+                    nombre = nombre_elem.get_text(" ", strip=True)
+
+            nombre_archivo = nombre.replace(" ", "_").replace("/", "-").replace("\\", "-")
+
+            def obtener_clubes(driver, url):
+                try:
+                    url_estadisticas = url.replace("/profil/", "/leistungsdatenverein/")
+                    
+                    driver.get(url_estadisticas)
+                    time.sleep(2)
+                    soup = BeautifulSoup(driver.page_source, "html.parser")
+
+                    tabla = soup.find("table", class_="items")
+                    if not tabla:
+                        return "Desconocido"
+
+                    clubes = set()
+                    for fila in tabla.find_all("tr"):
+                        columnas = fila.find_all("td")
+                        if len(columnas) < 2:
+                            continue
+
+                        club = columnas[1].get_text(strip=True)
+                        if club and all(x not in club.lower() for x in ["selección", "total", "fase", "sub-", "olímpico"]):
+                            clubes.add(club)
+
+                    return ", ".join(sorted(clubes)) if clubes else "Desconocido"
+
+                except Exception as e:
+                    print(f"Error al obtener clubes desde Transfermarkt: {e}")
+                    traceback.print_exc()
+                    return "Desconocido"
+                
+            def obtener_partidos(driver, url):
+                try:
+                    url_estadisticas = url.replace("/profil/", "/leistungsdatenverein/")
+
+                    driver.get(url_estadisticas)
+                    time.sleep(2)
+                    soup = BeautifulSoup(driver.page_source, "html.parser")
+
+                    tabla = soup.find("table", class_="items")
+                    if not tabla:
+                        return "Desconocido"
+
+                    for fila in tabla.find_all("tr"):
+                        columnas = fila.find_all("td")
+                        if not columnas or len(columnas) < 3:
+                            continue
+
+                        nombre_club = columnas[1].get_text(strip=True).lower()
+                        if "betis" in nombre_club:
+                            partidos = columnas[2].get_text(strip=True).replace(".", "")
+                            return partidos if partidos.isdigit() else "Desconocido"
+
+                    return "Desconocido"
+
+                except Exception as e:
+                    print(f"Error al obtener partidos desde Transfermarkt: {e}")
+                    traceback.print_exc()
+                    return "Desconocido"
+            
+            def obtener_info(label):
+                li_list = header.find_all("li", class_="data-header__label")
+                for li in li_list:
+                    if label in li.text:
+                        span = li.find("span")
+                        return span.get_text(strip=True) if span else "Desconocido"
+                return "Desconocido"
+
+            #F. Nacimiento, Nacionalidad y Posicion
+            fecha_nacimiento = obtener_info("F. Nacim./Edad")
+            nacionalidad = obtener_info("Nacionalidad")
+            posicion = obtener_info("Posición")
+
+            #Juega en su Seleccion
+            internacional = "Sí" if obtener_info("Selección") != "Desconocido" or obtener_info("Jugador de la selección") != "Desconocido" else "No"
+
+            #Valor de mercado
+            valor_elem = header.find("a", class_="data-header__market-value-wrapper")
+            valor_mercado = valor_elem.get_text(strip=True) if valor_elem else "Desconocido"
+
+            #Titulos obtenidos
+            titulos = []
+            for a in header.find_all("a", class_="data-header__success-data"):
+                titulo = a.get("title")
+                cantidad = a.find("span", class_="data-header__success-number")
+                if titulo and cantidad:
+                    titulos.append(f"{titulo} ({cantidad.text.strip()})")
+            titulos_str = ", ".join(titulos) if titulos else "Sin títulos"
+
+            # Clubes por los que ha pasado
+            clubes = obtener_clubes(driver, url)
+
+            # Numero de Partidos con el Betis
+            partidos = obtener_partidos(driver, url)
+
+            return {
+                "nombre": nombre,
+                "fecha_nacimiento": fecha_nacimiento,
+                "nacionalidad": nacionalidad,
+                "posición": posicion,
+                "internacional": internacional,
+                "titulos": titulos_str,
+                "valor_mercado": valor_mercado,
+                "clubes": clubes,
+                "partidos_betis": partidos,
+                "perfil": url,
+                "archivo": nombre_archivo
+            }
 
         except Exception as e:
-            print(f"Fallo al obtener Wikipedia para {nombre_jugador}: {e}")
-            traceback.print_exc()
-            return None
+            print(f"Intento {intento + 1}/{max_intentos} fallido: {e}")
+            time.sleep(random.uniform(5, 10))
 
-    def obtener_clubes(nombre_jugador):
-        soup = obtener_wikipedia(nombre_jugador)
-        if soup is None:
-            return "Desconocido"
-        
-        try:
-            clubes = set()
-
-            for tabla in soup.find_all("table", class_="wikitable"):
-                encabezado = tabla.find("tr")
-                if not encabezado:
-                    continue
-                encabezado_texto = encabezado.get_text().lower()
-
-                # Asegurarnos que es una tabla de clubes
-                if "club" in encabezado_texto and "liga" in encabezado_texto:
-                    filas = tabla.find_all("tr")[1:]  
-
-                    for fila in filas:
-                        celda = fila.find("td")
-                        if celda:
-                            b_tag = celda.find("b")
-                            if b_tag and b_tag.find("a"):
-                                club = b_tag.find("a").get_text(strip=True)
-                                if club and all(x not in club.lower() for x in ["selección", "total", "fase", "sub-", "olímpico"]):
-                                    clubes.add(club)
-
-            return ", ".join(sorted(clubes)) if clubes else "Desconocido"
-
-        except Exception as e:
-            print(f"Error obteniendo clubes de Wikipedia para {nombre_jugador}: {e}")
-            traceback.print_exc()
-            return "Desconocido"
-        
-    def obtener_partidos(nombre_jugador):
-        soup = obtener_wikipedia(nombre_jugador)
-        if soup is None:
-            return "Desconocido"
-
-        try:
-            for tabla in soup.find_all("table", class_="wikitable"):
-                filas = tabla.find_all("tr")[::-1]  # leer desde abajo
-
-                club_actual = None
-                for fila in reversed(filas):
-                    celdas = fila.find_all(["td", "th"])
-                    if not celdas:
-                        continue
-
-                    primera_celda = celdas[0]
-                    if "total club" in primera_celda.get_text(strip=True).lower():
-                        if club_actual and "betis" in club_actual:
-                            partidos = celdas[-2].get_text(strip=True)  # columna de partidos totales
-                            return partidos
-                    else:
-                        club_en_fila = primera_celda.get_text(strip=True).lower()
-                        if "betis" in club_en_fila:
-                            club_actual = club_en_fila
-
-            print("No se encontró 'Total club' del Betis.")
-            return "Desconocido"
-
-        except Exception as e:
-            print(f"Fallo en la búsqueda o extracción: {e}")
-            traceback.print_exc()
-            return "Desconocido"
-    
-    def obtener_info(label):
-        li_list = header.find_all("li", class_="data-header__label")
-        for li in li_list:
-            if label in li.text:
-                span = li.find("span")
-                return span.get_text(strip=True) if span else "Desconocido"
-        return "Desconocido"
-
-    #F. Nacimiento, Nacionalidad y Posicion
-    fecha_nacimiento = obtener_info("F. Nacim./Edad")
-    nacionalidad = obtener_info("Nacionalidad")
-    posicion = obtener_info("Posición")
-
-    #Juega en su Seleccion
-    internacional = "Sí" if obtener_info("Selección") != "Desconocido" or obtener_info("Jugador de la selección") != "Desconocido" else "No"
-
-    #Valor de mercado
-    valor_elem = header.find("a", class_="data-header__market-value-wrapper")
-    valor_mercado = valor_elem.get_text(strip=True) if valor_elem else "Desconocido"
-
-    #Titulos obtenidos
-    titulos = []
-    for a in header.find_all("a", class_="data-header__success-data"):
-        titulo = a.get("title")
-        cantidad = a.find("span", class_="data-header__success-number")
-        if titulo and cantidad:
-            titulos.append(f"{titulo} ({cantidad.text.strip()})")
-    titulos_str = ", ".join(titulos) if titulos else "Sin títulos"
-
-    # Clubes por los que ha pasado
-    clubes = obtener_clubes(nombre)
-
-    # Numero de Partidos con el Betis
-    partidos = obtener_partidos(nombre)
-
-    return {
-        "nombre": nombre,
-        "fecha_nacimiento": fecha_nacimiento,
-        "nacionalidad": nacionalidad,
-        "posición": posicion,
-        "internacional": internacional,
-        "titulos": titulos_str,
-        "valor_mercado": valor_mercado,
-        "clubes": clubes,
-        "partidos_betis": partidos,
-        "perfil": url,
-        "archivo": nombre_archivo
-    }
+    print(f"No se pudo acceder correctamente a {url} después de {max_intentos} intentos.")
+    return None
 
 def main():
     driver = configurar_driver()
@@ -235,7 +216,7 @@ def main():
                 f"Perfil Transfermarkt: {datos['perfil']}\n"
             )
         print(f"Guardado: {ruta}")
-        time.sleep(1)
+        time.sleep(random.uniform(3, 6))
 
     driver.quit()
     print("Todos los jugadores activos procesados.")

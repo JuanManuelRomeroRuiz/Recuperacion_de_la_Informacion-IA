@@ -57,8 +57,7 @@ def main():
         time.sleep(1)
 
     driver.quit()
-
-    os.makedirs("data", exist_ok=True)
+    
     with open("url_jugadores_betis.txt", "w", encoding="utf-8") as f:
         for url in sorted(todos_las_url):
             f.write(url + "\n")
