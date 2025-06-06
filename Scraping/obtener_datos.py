@@ -189,7 +189,7 @@ def obetener_datos(driver, url, max_intentos=10):
 
 def main():
     driver = configurar_driver()
-    os.makedirs("Recuperacion_Betis/corpus", exist_ok=True)
+    os.makedirs("corpus", exist_ok=True)
 
     with open("url_jugadores_betis.txt", "r", encoding="utf-8") as f:
         urls = [line.strip() for line in f if line.strip()]
@@ -201,7 +201,7 @@ def main():
             print("Jugador retirado o no se pudo procesar. Saltando.")
             continue
 
-        ruta = f"Recuperacion_Betis/corpus/{datos['archivo']}.txt"
+        ruta = f"corpus/{datos['archivo']}.txt"
         with open(ruta, "w", encoding="utf-8") as f_out:
             f_out.write(
                 f"Nombre: {datos['nombre']}\n"
