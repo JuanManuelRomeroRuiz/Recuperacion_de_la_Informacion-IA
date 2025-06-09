@@ -3,23 +3,23 @@ Defensas con más de 50 partidos disputados con el Real Betis
 Centrocampistas internacionales
 Delanteros menores de 25 años
 Jugadores cuyo valor de mercado supera los 10 millones de euros
-Jugadores sin títulos a lo largo de su carrera
-Jugadores que han pasado por el F. C. Barcelona
-Jugadores con más de 30 años
-Jugadores con nacionalidad argentina
-Jugadores con nacionalidad brasileña
-Jugadores nacidos antes del año 2000
-Jugadores que han jugado en el Sevilla F. C.
-Jugadores cuya posición sea únicamente defensa
-Jugadores no internacionales
-Jugadores con un valor de mercado inferior a 1 millón de euros
-Jugadores con más de un título ganado
-Jugadores que han jugado en al menos cinco clubes diferentes
-Jugadores que han ganado, al menos, 2 Ligas Españolas
-Jugadores con menos de 20 partidos disputados con el Real Betis
-Jugadores con más de 100 partidos disputados con el Real Betis
-Centrocampistas españoles con más de 5 millones de valor de mercado
-Delanteros nacidos después de 2004
-Jugadores cuyo nombre completo contiene más de 3 palabras
-Jugadores que han jugado en el Nottingham Forest
-Centrocampistas menores de 24 años
+Marroquies con más de 20 partidos
+Jugadores que han pasado por el F. C. Barcelona y han sido internacionales
+Jugadores con más de 30 años y mas de 100 partidos
+Jugadores con nacionalidad brasileña y menores de 23 años
+Porteros menores de 21 años
+Delanteros con más de 5 millnes de valor
+Jugadores internacionales con titulos
+Centrocampistas con más de 8 millones de valor
+Delanteros con más de 80 partidos
+Defensas menores de 24 años que han sido internacionales
+Jugadores con nacionalidad argentina que hayan ganado algun titulo
+Jugadores que hayan pasado por el barcelona y tengan más de 2 millones de valor
+Porteros con mas de 100 partidos
+Defensas mayores de 32 años
+Delanteros internacionales con menos de 30 años
+Jugadores con nacionalidad francesa y más de 30 partidos
+Jugadores menores de 21 años y más de 3 millones de valor
+Centrocampistas mayores de 28 años con más de 100 partidos
+Defensas con más de 7 millones de valor
+Delanteros internacionales con titulos

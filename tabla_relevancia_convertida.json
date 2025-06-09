@@ -1,0 +1,351 @@
+[
+  {
+    "id": "N1",
+    "consulta": "portero AND titulos",
+    "relevantes": [
+      "Adrián_San_Miguel_del_Castillo.txt",
+      "Antonio_Adán_Garrido.txt",
+      "Brimah_Razak.txt",
+      "Daniel_Martín_Fernández.txt",
+      "Fabricio_Martin_Agosto_Ramírez.txt",
+      "Joel_Robles_Blázquez.txt",
+      "Manuel_Herrera_Yagüe.txt",
+      "Pau_López_Sabata.txt",
+      "Rui_Tiago_Dantas_da_Silva.txt"
+    ]
+  },
+  {
+    "id": "N2",
+    "consulta": "defensa AND partidos > 50",
+    "relevantes": [
+      "Aitor_Ruibal_García.txt",
+      "Alejandro_Martínez_Sánchez.txt",
+      "Alexandre_Moreno_Lopera.txt",
+      "Aïssa_Mandi.txt",
+      "Bruno_González_Cabrera.txt",
+      "Cristiano_Piccini.txt",
+      "Edgar_González_Estrada.txt",
+      "Emerson_Aparecido_Leite_de_Souza_Júnior.txt",
+      "Germán_Alejo_Pezzella.txt",
+      "Héctor_Bellerín.txt",
+      "José_Antonio_Caro_Martínez.txt",
+      "Juan_Carlos_Pérez_López.txt",
+      "Juan_Miranda_González.txt",
+      "Marc_Bartra.txt",
+      "Natan_Bernardo_de_Souza.txt",
+      "Rafael_Jesús_Navarro_Mazuelos.txt",
+      "Riza_Durmisi.txt",
+      "Sidnei_Rechel_da_Silva_Júnior.txt",
+      "Víctor_Ruiz_Torre.txt",
+      "Youssouf_Sabaly.txt",
+      "Ángel_Ortiz_Monterrey.txt"
+    ]
+  },
+  {
+    "id": "N3",
+    "consulta": "centrocampista AND internacional",
+    "relevantes": [
+      "Fabián_Ruiz_Peña.txt",
+      "Giovani_Lo_Celso.txt",
+      "Guido_Rodríguez.txt",
+      "Isco.txt",
+      "José_Andrés_Guardado_Hernández.txt",
+      "João_Lucas_de_Souza_Cardoso.txt"
+    ]
+  },
+  {
+    "id": "N4",
+    "consulta": "delantero AND edad < 25",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Assane_Diao_Diaoune.txt",
+      "Iker_Losada_Aragunde.txt",
+      "Jesús_Rodríguez_Caraballo.txt",
+      "Luiz_Henrique_André_Rosa_da_Silva.txt",
+      "Roberto_González_Bayón.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N5",
+    "consulta": "valor_mercado > 10000000",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Antony_Matheus_dos_Santos.txt",
+      "Assane_Diao_Diaoune.txt",
+      "Chadi_Riad.txt",
+      "Fabián_Ruiz_Peña.txt",
+      "Giovani_Lo_Celso.txt",
+      "João_Lucas_de_Souza_Cardoso.txt",
+      "Juan_Camilo_Hernández_Suárez.txt",
+      "Juan_Miranda_González.txt",
+      "Luiz_Henrique_André_Rosa_da_Silva.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N6",
+    "consulta": "marruecos AND partidos > 20",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Chadi_Riad.txt"
+    ]
+  },
+  {
+    "id": "N7",
+    "consulta": "barcelona AND internacional",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Arnaldo_Antonio_Sanabria_Ayala.txt",
+      "Chadi_Riad.txt",
+      "Héctor_Junior_Firpo_Adamés.txt",
+      "Juan_Miranda_González.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N8",
+    "consulta": "edad > 30 AND partidos > 100",
+    "relevantes": [
+      "Alexandre_Moreno_Lopera.txt",
+      "Antonio_Adán_Garrido.txt",
+      "Aïssa_Mandi.txt",
+      "Borja_Iglesias_Quintas.txt",
+      "Cristian_Tello_Herrera.txt",
+      "Germán_Alejo_Pezzella.txt",
+      "Guido_Rodríguez.txt",
+      "José_Andrés_Guardado_Hernández.txt",
+      "Juan_Miguel_Jiménez_López.txt",
+      "Lorenzo_Morón_García.txt",
+      "Marc_Bartra.txt",
+      "Rui_Tiago_Dantas_da_Silva.txt",
+      "Salvador_Sevilla_López.txt",
+      "Sergio_Canales_Madrazo.txt",
+      "William_Carvalho.txt",
+      "Willian_José_da_Silva.txt"
+    ]
+  },
+  {
+    "id": "N9",
+    "consulta": "brasil AND edad < 23",
+    "relevantes": [
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N10",
+    "consulta": "portero AND edad < 21",
+    "relevantes": []
+  },
+  {
+    "id": "N11",
+    "consulta": "delantero AND valor_mercado > 5000000",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Antony_Matheus_dos_Santos.txt",
+      "Assane_Diao_Diaoune.txt",
+      "Ayoze_Pérez_Gutiérrez.txt",
+      "Jesús_Rodríguez_Caraballo.txt",
+      "Juan_Camilo_Hernández_Suárez.txt",
+      "Luiz_Henrique_André_Rosa_da_Silva.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N12",
+    "consulta": "internacional AND titulos",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Abner_Vinícius_da_Silva_Santos.txt",
+      "Antony_Matheus_dos_Santos.txt",
+      "Arnaldo_Antonio_Sanabria_Ayala.txt",
+      "Assane_Diao_Diaoune.txt",
+      "Ayoze_Pérez_Gutiérrez.txt",
+      "Aïssa_Mandi.txt",
+      "Chadi_Riad.txt",
+      "Cédric_Bakambu.txt",
+      "Diego_Lainez_Leyva.txt",
+      "Fabián_Ruiz_Peña.txt",
+      "Germán_Alejo_Pezzella.txt",
+      "Giovani_Lo_Celso.txt",
+      "Guido_Rodríguez.txt",
+      "Héctor_Junior_Firpo_Adamés.txt",
+      "Isco.txt",
+      "Jesús_Rodríguez_Caraballo.txt",
+      "Joel_Nathaniel_Campbell_Samuels.txt",
+      "Jordi_Amat_Maas.txt",
+      "José_Andrés_Guardado_Hernández.txt",
+      "João_Lucas_de_Souza_Cardoso.txt",
+      "Juan_Camilo_Hernández_Suárez.txt",
+      "Juan_Miranda_González.txt",
+      "Luiz_Henrique_André_Rosa_da_Silva.txt",
+      "Ricardo_Rodríguez.txt",
+      "Rui_Tiago_Dantas_da_Silva.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N13",
+    "consulta": "posición:centrocampista AND valor_mercado > 8000000",
+    "relevantes": [
+      "Daniel_Ceballos_Fernández.txt",
+      "Fabián_Ruiz_Peña.txt",
+      "Giovani_Lo_Celso.txt",
+      "Guido_Rodríguez.txt",
+      "João_Lucas_de_Souza_Cardoso.txt",
+      "Sergi_Altimira_Clavell.txt"
+    ]
+  },
+  {
+    "id": "N14",
+    "consulta": "delantero AND partidos > 80",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Arnaldo_Antonio_Sanabria_Ayala.txt",
+      "Borja_Iglesias_Quintas.txt",
+      "Cristian_Tello_Herrera.txt",
+      "Juan_Miguel_Jiménez_López.txt",
+      "Lorenzo_Morón_García.txt",
+      "Rodrigo_Sánchez_Rodríguez.txt",
+      "Willian_José_da_Silva.txt"
+    ]
+  },
+  {
+    "id": "N15",
+    "consulta": "posición:defensa AND edad < 25 AND internacional",
+    "relevantes": [
+      "Chadi_Riad.txt"
+    ]
+  },
+  {
+    "id": "N16",
+    "consulta": "argentino AND titulos",
+    "relevantes": [
+      "Germán_Alejo_Pezzella.txt",
+      "Giovani_Lo_Celso.txt",
+      "Guido_Rodríguez.txt",
+      "Luciano_Fabián_Monzón.txt"
+    ]
+  },
+  {
+    "id": "N17",
+    "consulta": "barcelona AND valor_mercado > 2000000",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Arnaldo_Antonio_Sanabria_Ayala.txt",
+      "Carles_Aleñá_Castillo.txt",
+      "Chadi_Riad.txt",
+      "Emerson_Aparecido_Leite_de_Souza_Júnior.txt",
+      "Héctor_Bellerín.txt",
+      "Héctor_Junior_Firpo_Adamés.txt",
+      "Juan_Miranda_González.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt",
+      "Álex_Collado_Gutiérrez.txt"
+    ]
+  },
+  {
+    "id": "N18",
+    "consulta": "portero AND partidos > 100",
+    "relevantes": [
+      "Antonio_Adán_Garrido.txt",
+      "Rui_Tiago_Dantas_da_Silva.txt"
+    ]
+  },
+  {
+    "id": "N19",
+    "consulta": "defensa AND edad > 32",
+    "relevantes": [
+      "Alejandro_Martínez_Sánchez.txt",
+      "Alin_Toșca.txt",
+      "Amro_Tarek.txt",
+      "Aïssa_Mandi.txt",
+      "Bruno_González_Cabrera.txt",
+      "Cristiano_Piccini.txt",
+      "Germán_Alejo_Pezzella.txt",
+      "Hugo_Miguel_de_Almeida_Costa_Lopes.txt",
+      "Jordi_Amat_Maas.txt",
+      "Jorge_Casado_Rodríguez.txt",
+      "Juan_Carlos_Pérez_López.txt",
+      "Luciano_Fabián_Monzón.txt",
+      "Marc_Bartra.txt",
+      "Martín_Montoya_Torralbo.txt",
+      "Miguel_Roqué_Farrero.txt",
+      "Ricardo_Rodríguez.txt",
+      "Sidnei_Rechel_da_Silva_Júnior.txt",
+      "Víctor_Ruiz_Torre.txt"
+    ]
+  },
+  {
+    "id": "N20",
+    "consulta": "delantero AND internacional AND edad < 30",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Antony_Matheus_dos_Santos.txt",
+      "Arnaldo_Antonio_Sanabria_Ayala.txt",
+      "Assane_Diao_Diaoune.txt",
+      "Diego_Lainez_Leyva.txt",
+      "Jesús_Rodríguez_Caraballo.txt",
+      "Juan_Camilo_Hernández_Suárez.txt",
+      "Luiz_Henrique_André_Rosa_da_Silva.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N21",
+    "consulta": "francia AND partidos > 30",
+    "relevantes": [
+      "Romain_Paul_Jean-Michel_Perraud.txt",
+      "Yassin_Fekir.txt"
+    ]
+  },
+  {
+    "id": "N22",
+    "consulta": "edad < 21 AND valor_mercado > 3000000",
+    "relevantes": [
+      "Assane_Diao_Diaoune.txt",
+      "Jesús_Rodríguez_Caraballo.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  },
+  {
+    "id": "N23",
+    "consulta": "centrocampista AND edad > 28 AND partidos > 100",
+    "relevantes": [
+      "Daniel_Ceballos_Fernández.txt",
+      "Guido_Rodríguez.txt",
+      "José_Andrés_Guardado_Hernández.txt",
+      "Salvador_Sevilla_López.txt",
+      "Sergio_Canales_Madrazo.txt",
+      "William_Carvalho.txt"
+    ]
+  },
+  {
+    "id": "N24",
+    "consulta": "defensa AND valor_mercado > 7000000",
+    "relevantes": [
+      "Chadi_Riad.txt",
+      "Emerson_Aparecido_Leite_de_Souza_Júnior.txt",
+      "Héctor_Junior_Firpo_Adamés.txt",
+      "Juan_Miranda_González.txt",
+      "Natan_Bernardo_de_Souza.txt"
+    ]
+  },
+  {
+    "id": "N25",
+    "consulta": "delantero AND internacional AND titulos",
+    "relevantes": [
+      "Abde_Ezzalzouli.txt",
+      "Antony_Matheus_dos_Santos.txt",
+      "Arnaldo_Antonio_Sanabria_Ayala.txt",
+      "Assane_Diao_Diaoune.txt",
+      "Ayoze_Pérez_Gutiérrez.txt",
+      "Cédric_Bakambu.txt",
+      "Diego_Lainez_Leyva.txt",
+      "Jesús_Rodríguez_Caraballo.txt",
+      "Joel_Nathaniel_Campbell_Samuels.txt",
+      "Juan_Camilo_Hernández_Suárez.txt",
+      "Luiz_Henrique_André_Rosa_da_Silva.txt",
+      "Vitor_Hugo_Roque_Ferreira.txt"
+    ]
+  }
+]
